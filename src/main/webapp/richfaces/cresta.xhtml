@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:a4j="http://richfaces.org/a4j"
+   xmlns:rich="http://richfaces.org/rich"
+   template="/WEB-INF/templates/richfaces/default.xhtml">
+   <ui:define name="content">
+
+      <h:form id="reg">
+         <h2>Registro de Cresta</h2>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="name" value="Descripcion:"/>
+            <h:inputText id="name" value="#{newCresta.descr}" />
+            <h:message for="name" errorClass="invalid"/>
+
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{crestaController.register}" value="Registrar" styleClass="register"/>
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+      </h:form>
+      <br/>
+      <h:panelGroup rendered="#{empty crestas}">
+         <em>Crestas no registradas</em>
+      </h:panelGroup>
+      <rich:dataTable var="_cresta" value="#{crestas}" rendered="#{not empty crestas}" styleClass="tablestyle">
+         <f:facet name="header">Crestas</f:facet>
+         <rich:column>
+            <f:facet name="header">Id</f:facet>
+                #{_cresta.id}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Descripcion</f:facet>
+                #{_cresta.descr}
+         </rich:column>
+      </rich:dataTable>
+   </ui:define>
+</ui:composition>

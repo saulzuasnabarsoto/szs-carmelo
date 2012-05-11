@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:a4j="http://richfaces.org/a4j"
+   xmlns:rich="http://richfaces.org/rich"
+   template="/WEB-INF/templates/richfaces/default.xhtml">
+   <ui:define name="content">
+
+      <h:form id="reg">
+         <h2>Registro de Ave</h2>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="placa" value="Placa:"/>
+            <h:inputText id="placa" value="#{newAve.placa}" />
+            <h:message for="placa" errorClass="invalid"/>
+
+            <h:outputLabel for="nombre" value="Nombre:"/>
+            <h:inputText id="nombre" value="#{newAve.nombre}"/>
+            <h:message for="nombre" errorClass="invalid"/>
+
+            <h:outputLabel for="pluma" value="Pluma:"/>
+            <h:inputText id="pluma" value="#{newAve.pluma}"/>
+            <h:message for="pluma" errorClass="invalid"/>
+
+            <h:outputLabel for="fecNac" value="Fec.Nac:"/>
+            <h:inputText id="fecNac" value="#{newAve.fecNac}"/>
+            <h:message for="fecNac" errorClass="invalid"/>
+
+            <h:outputLabel for="sexo" value="Sexo:"/>
+            <rich:select id="sexo" value="#{newSexo1.id}">
+            	<f:selectItems value="#{sexos}" var="_sexo" itemValue="#{_sexo.id}" itemLabel="#{_sexo.descr}"/>
+            </rich:select>
+            <h:message for="sexo" errorClass="invalid"/>
+
+            <h:outputLabel for="raza" value="Raza:"/>
+            <rich:select id="raza" value="#{newRaza1.id}">
+            	<f:selectItems value="#{razas}" var="_raza" itemValue="#{_raza.id}" itemLabel="#{_raza.descr}"/>
+            </rich:select>
+            <h:message for="raza" errorClass="invalid"/>
+
+            <h:outputLabel for="cresta" value="Cresta:"/>
+            <rich:select id="cresta" value="#{newCresta1.id}">
+            	<f:selectItems value="#{crestas}" var="_cresta" itemValue="#{_cresta.id}" itemLabel="#{_cresta.descr}"/>
+            </rich:select>
+            <h:message for="cresta" errorClass="invalid"/>
+
+            <h:outputLabel for="pata" value="Pata:"/>
+            <rich:select id="pata" value="#{newPata1.id}">
+            	<f:selectItems value="#{patas}" var="_pata" itemValue="#{_pata.id}" itemLabel="#{_pata.descr}"/>
+            </rich:select>
+            <h:message for="pata" errorClass="invalid"/>
+
+            <h:outputLabel for="criador" value="Criador:"/>
+            <rich:select id="criador" value="#{newCriador1.id}">
+            	<f:selectItems value="#{criadores}" var="_criador" itemValue="#{_criador.id}" itemLabel="#{_criador.descr}"/>
+            </rich:select>
+            <h:message for="criador" errorClass="invalid"/>
+
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{aveController.register}" value="Registrar" styleClass="register"/>
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+      </h:form>
+      <br/>
+      <h:panelGroup rendered="#{empty aves}">
+         <em>Aves no registradas.</em>
+      </h:panelGroup>
+      <rich:dataTable var="_ave" value="#{aves}" rendered="#{not empty aves}" styleClass="tablestyle">
+         <f:facet name="header">Aves</f:facet>
+         <rich:column>
+            <f:facet name="header">Id</f:facet>
+            #{_ave.id}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Nombre</f:facet>
+            #{_ave.nombre}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Pluma</f:facet>
+            #{_ave.pluma}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Fec.Nac</f:facet>
+            #{_ave.fecNac}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Raza</f:facet>
+            #{_ave.raza.descr}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Sexo</f:facet>
+            #{_ave.sexo.descr}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Cresta</f:facet>
+            #{_ave.cresta.descr}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Pata</f:facet>
+            #{_ave.pata.descr}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Criador</f:facet>
+            #{_ave.criador.descr}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Ave Padre</f:facet>
+            #{_ave.aveIdPadre}
+         </rich:column>
+         <rich:column>
+            <f:facet name="header">Ave Madre</f:facet>
+            #{_ave.aveIdMadre}
+         </rich:column>
+      </rich:dataTable>
+   </ui:define>
+</ui:composition>

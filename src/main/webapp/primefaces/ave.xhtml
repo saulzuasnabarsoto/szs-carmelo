@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui" 
+   template="/WEB-INF/templates/primefaces/default.xhtml">
+   <ui:define name="content">
+
+      <h:form id="reg">
+         <h2>Registro de Ave</h2>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="placa" value="Placa:"/>
+            <h:inputText id="placa" value="#{newAve.placa}" />
+            <h:message for="placa" errorClass="invalid"/>
+
+            <h:outputLabel for="nombre" value="Nombre:"/>
+            <h:inputText id="nombre" value="#{newAve.nombre}"/>
+            <h:message for="nombre" errorClass="invalid"/>
+
+            <h:outputLabel for="pluma" value="Pluma:"/>
+            <h:inputText id="pluma" value="#{newAve.pluma}"/>
+            <h:message for="pluma" errorClass="invalid"/>
+
+            <h:outputLabel for="fecNac" value="Fec.Nac:"/>
+            <h:inputText id="fecNac" value="#{newAve.fecNac}"/>
+            <h:message for="fecNac" errorClass="invalid"/>
+
+            <h:outputLabel for="sexo" value="Sexo:"/>
+            <p:selectOneMenu id="sexo" value="#{newSexo1.id}">
+            	<f:selectItems value="#{sexos}" var="_sexo" itemValue="#{_sexo.id}" itemLabel="#{_sexo.descr}"/>
+            	<p:column>#{_sexo.id}</p:column>
+            	<p:column>#{_sexo.descr}</p:column>
+            </p:selectOneMenu>
+            <h:message for="sexo" errorClass="invalid"/>
+
+            <h:outputLabel for="raza" value="Raza:"/>
+            <p:selectOneMenu id="raza" value="#{newRaza1.id}">
+            	<f:selectItems value="#{razas}" var="_raza" itemValue="#{_raza.id}" itemLabel="#{_raza.descr}"/>
+            </p:selectOneMenu>
+            <h:message for="raza" errorClass="invalid"/>
+
+            <h:outputLabel for="cresta" value="Cresta:"/>
+            <p:selectOneMenu id="cresta" value="#{newCresta1.id}">
+            	<f:selectItems value="#{crestas}" var="_cresta" itemValue="#{_cresta.id}" itemLabel="#{_cresta.descr}"/>
+            </p:selectOneMenu>
+            <h:message for="cresta" errorClass="invalid"/>
+
+            <h:outputLabel for="pata" value="Pata:"/>
+            <p:selectOneMenu id="pata" value="#{newPata1.id}">
+            	<f:selectItems value="#{patas}" var="_pata" itemValue="#{_pata.id}" itemLabel="#{_pata.descr}"/>
+            </p:selectOneMenu>
+            <h:message for="pata" errorClass="invalid"/>
+
+            <h:outputLabel for="criador" value="Criador:"/>
+            <p:selectOneMenu id="criador" value="#{newCriador1.id}">
+            	<f:selectItems value="#{criadores}" var="_criador" itemValue="#{_criador.id}" itemLabel="#{_criador.descr}"/>
+            </p:selectOneMenu>
+            <h:message for="criador" errorClass="invalid"/>
+
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{aveController.register}" value="Registrar" styleClass="register"/>
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+      </h:form>
+      <br/>
+      <h:panelGroup rendered="#{empty aves}">
+         <em>Aves no registradas.</em>
+      </h:panelGroup>
+      <p:dataTable var="_ave" value="#{aves}" rendered="#{not empty aves}" styleClass="tablestyle">
+         <f:facet name="header">Aves</f:facet>
+         <p:column>
+            <f:facet name="header">Id</f:facet>
+            #{_ave.id}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Nombre</f:facet>
+            #{_ave.nombre}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Pluma</f:facet>
+            #{_ave.pluma}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Fec.Nac</f:facet>
+            #{_ave.fecNac}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Raza</f:facet>
+            #{_ave.raza.descr}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Sexo</f:facet>
+            #{_ave.sexo.descr}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Cresta</f:facet>
+            #{_ave.cresta.descr}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Pata</f:facet>
+            #{_ave.pata.descr}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Criador</f:facet>
+            #{_ave.criador.descr}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Ave Padre</f:facet>
+            #{_ave.aveIdPadre}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Ave Madre</f:facet>
+            #{_ave.aveIdMadre}
+         </p:column>
+      </p:dataTable>
+   </ui:define>
+</ui:composition>

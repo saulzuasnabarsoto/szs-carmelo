@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui" 
+   template="/WEB-INF/templates/primefaces/default.xhtml">
+   <ui:define name="content">
+
+      <h:form id="reg">
+         <h2>Registro de Cresta</h2>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="name" value="Descripcion:"/>
+            <h:inputText id="name" value="#{newCresta.descr}" />
+            <h:message for="name" errorClass="invalid"/>
+
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{crestaController.register}" value="Registrar" styleClass="register"/>
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+	      <br/>
+	      <h:panelGroup rendered="#{empty crestas}">
+	         <em>Crestas no registradas</em>
+	      </h:panelGroup>
+	      <p:dataTable id="tableId" var="_cresta" value="#{crestas}" rendered="#{not empty crestas}" styleClass="tablestyle">
+	         <f:facet name="header">Crestas</f:facet>
+	         <p:column>
+	            <f:facet name="header">
+	            	<h:outputText value="Id" />    
+	            </f:facet>
+	            <h:outputText value="#{_cresta.id}" />    
+	         </p:column>
+	         <p:column>
+	            <f:facet name="header">
+	            	<h:outputText value="Descripcion" />    
+	            </f:facet>
+	            <h:outputText value="#{_cresta.descr}" />    
+	         </p:column>
+	      </p:dataTable>
+	      <h:panelGrid columns="4">
+		      <h:commandLink>
+		      	 <p:graphicImage value="/resources/gfx/excel.png" height="32" width="32" />
+			  	 <p:dataExporter type="xls" target="tableId" fileName="crestas"/>
+			  </h:commandLink>
+		      <h:commandLink>
+		      	 <p:graphicImage value="/resources/gfx/pdf.png" height="32" width="32" />
+			  	 <p:dataExporter type="pdf" target="tableId" fileName="crestas"/>
+			  </h:commandLink>
+		      <h:commandLink>
+		      	 <p:graphicImage value="/resources/gfx/csv.png" height="32" width="32" />
+			  	 <p:dataExporter type="csv" target="tableId" fileName="crestas"/>
+			  </h:commandLink>
+		      <h:commandLink>
+		      	 <p:graphicImage value="/resources/gfx/xml.png" height="32" width="32" />
+			  	 <p:dataExporter type="xml" target="tableId" fileName="crestas"/>
+			  </h:commandLink>
+		  </h:panelGrid>
+      </h:form>
+   </ui:define>
+</ui:composition>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+   xmlns:f="http://java.sun.com/jsf/core">
+<f:metadata>
+	<f:viewParam name="skin" value="#{skinBean.skin}" />
+</f:metadata>
+<f:view contentType="text/html">    
+	<h:head>
+	   <title>Java EE 6 Starter Application</title>
+	   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	   <h:outputStylesheet name="css/screen.css" />
+	</h:head>
+	<h:body>
+	   <ui:include src="/WEB-INF/templates/richfaces/skin-chooser.xhtml" />
+	
+	   <div id="container">
+	      <div id="menu">
+	   	  	<h:form>
+	   		<rich:toolbar rendered="#{login.loggedIn}" >
+				<rich:dropDownMenu mode="server">
+					<f:facet name="label">
+						<h:outputText value="Archivo" />
+					</f:facet>
+					<rich:menuItem label="Ave" action="ave.xhtml" />
+					<rich:menuItem label="Criador" action="criador.xhtml" />
+				</rich:dropDownMenu>
+				<rich:dropDownMenu mode="server">
+					<f:facet name="label">
+						<h:outputText value="Tablas" />
+					</f:facet>
+					<rich:menuItem label="Patas" action="pata.xhtml" />
+					<rich:menuItem label="Cresta" action="cresta.xhtml" />
+					<rich:menuItem label="Raza" action="raza.xhtml" />
+				</rich:dropDownMenu>
+			</rich:toolbar>
+			</h:form>
+	      </div>
+	      <div id="content">
+	         <ui:insert name="content">
+	                    [Template content will be inserted here]
+	         </ui:insert>
+	      </div>
+	      <div id="footer">
+	         <p>
+	            Este proyecto fue desarrollado por SZS<br />
+	         </p>
+	      </div>
+	   </div>
+	</h:body>
+</f:view>	
+</html>

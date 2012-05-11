@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui" 
+   xmlns:f="http://java.sun.com/jsf/core">
+<f:metadata>
+	<f:viewParam name="theme" value="#{themeBean.theme}" />
+</f:metadata>
+<f:view contentType="text/html">    
+	<h:head>
+	   <title>Java EE 6 Starter Application</title>
+	   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	   <h:outputStylesheet name="css/screen.css" />
+	</h:head>
+	<h:body>
+	   <ui:include src="/WEB-INF/templates/primefaces/theme-chooser.xhtml" />
+	
+	   <div id="container">
+	      <div id="menu">
+	   	  	<h:form>
+	   		<p:toolbar  rendered="#{login.loggedIn}">
+	   			<p:toolbarGroup>
+					<p:menuButton value="Archivo">
+						<p:menuitem value="Ave" url="ave.jsf" />
+						<p:menuitem value="Criador" url="criador.jsf" />
+					</p:menuButton>
+				</p:toolbarGroup>
+	   			<p:toolbarGroup>
+					<p:menuButton value="Tablas">
+						<p:menuitem value="Patas" url="pata.jsf" />
+						<p:menuitem value="Cresta" url="cresta.jsf" />
+						<p:menuitem value="Raza" url="raza.jsf" />
+					</p:menuButton>
+				</p:toolbarGroup>
+			</p:toolbar>
+			</h:form>
+	      </div>
+	      <div id="content">
+	         <ui:insert name="content">
+	                    [Template content will be inserted here]
+	         </ui:insert>
+	      </div>
+	      <div id="footer">
+	         <p>
+	            Este proyecto fue desarrollado por SZS<br />
+	         </p>
+	      </div>
+	   </div>
+	</h:body>
+</f:view>	
+</html>

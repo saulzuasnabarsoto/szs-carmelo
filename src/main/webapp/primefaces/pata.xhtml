@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui" 
+   template="/WEB-INF/templates/primefaces/default.xhtml">
+   <ui:define name="content">
+
+      <h:form id="reg">
+         <h2>Registro de Pata</h2>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+            <h:outputLabel for="name" value="Name:"/>
+            <h:inputText id="name" value="#{newPata.descr}" />
+            <h:message for="name" errorClass="invalid"/>
+
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{pataController.register}" value="Registrar" styleClass="register"/>
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+      </h:form>
+      <br/>
+      <h:panelGroup rendered="#{empty patas}">
+         <em>Patas no registradas.</em>
+      </h:panelGroup>
+      <p:dataTable var="_pata" value="#{patas}" rendered="#{not empty patas}" styleClass="tablestyle">
+         <f:facet name="header">Patas</f:facet>
+         <p:column>
+            <f:facet name="header">Id</f:facet>
+                #{_pata.id}
+         </p:column>
+         <p:column>
+            <f:facet name="header">Descripcion</f:facet>
+                #{_pata.descr}
+         </p:column>
+      </p:dataTable>
+   </ui:define>
+</ui:composition>
